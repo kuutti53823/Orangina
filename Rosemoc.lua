@@ -138,7 +138,6 @@ getgenv().temptable = {
     honeycurrent = statstable.Totals.Honey,
     dead = false,
     float = false,
-    pepsigodmode = false,
     pepsiautodig = false,
     alpha = false,
     beta = false,
@@ -457,7 +456,6 @@ getgenv().kocmoc = {
         autokillmobs = false,
         autoant = false,
         killwindy = false,
-        godmode = false,
         disableconversion = false,
         autodonate = false,
         farmdigital = false,
@@ -2702,7 +2700,7 @@ for i, v in pairs(buffTable) do
 end
 
 local miscc = misctab:CreateSection("Misc")
-miscc:CreateButton("Ant Challenge Semi-Godmode", function()
+--[[miscc:CreateButton("Ant Challenge Semi-Godmode", function()
     api.tween(1, CFrame.new(93.4228, 32.3983, 553.128))
     task.wait(1)
     game.ReplicatedStorage.Events.ToyEvent:FireServer("Ant Challenge")
@@ -2718,7 +2716,7 @@ miscc:CreateButton("Ant Challenge Semi-Godmode", function()
     task.wait(8)
     api.tween(1, CFrame.new(93.4228, 32.3983, 553.128))
 end)
---[[ local gpusave = miscc:CreateToggle('GPU, CPU Saver', nil, function(State) --Sakata
+local gpusave = miscc:CreateToggle('GPU, CPU Saver', nil, function(State) --Sakata
     kocmoc.toggles.gpusaver = State
 end) ]]
 local cpusave = miscc:CreateToggle("CPU / GPU Saver", nil, function(State)
@@ -2734,10 +2732,7 @@ local jptoggle = miscc:CreateToggle("Jump Power", nil, function(State)
 end)
 jptoggle:CreateKeybind(nil, function(Key) end)
 guiElements["toggles"]["loopjump"] = jptoggle
-guiElements["toggles"]["godmode"] = miscc:CreateToggle("Godmode", nil, function(State)
-    kocmoc.toggles.godmode = State
-    bssapi:Godmode(State)
-end)
+
 local misco = misctab:CreateSection("Other")
 misco:CreateDropdown("Equip Accesories", accesoriestable, function(Option)
     local ohString1 = "Equip"
@@ -2767,7 +2762,7 @@ end)
 
 
 
-if string.find(string.upper(identifyexecutor()), "SYN") or string.find(string.upper(identifyexecutor()), "SCRIP") then
+--[[if string.find(string.upper(identifyexecutor()), "SYN") or string.find(string.upper(identifyexecutor()), "SCRIP") then
     local visu = misctab:CreateSection("Visual")
     local alertText = "☢️ A nuke is incoming! ☢️"
     local alertDesign = "Purple"
@@ -2999,6 +2994,7 @@ if string.find(string.upper(identifyexecutor()), "SYN") or string.find(string.up
         end
     end)
 end
+]]
 
 local webhooksection = misctab:CreateSection("External")
 guiElements["toggles"]["shutdownkick"] = webhooksection:CreateToggle("Shutdown on Kick", nil, function(State)
@@ -4515,7 +4511,7 @@ task.spawn(function()
         if kocmoc.toggles.freerobopass then
             game:GetService("ReplicatedStorage").Events.ToyEvent:FireServer("Free Robo Pass Dispenser")
         end
-        if kocmoc.toggles.autoquest then
+        --[[if kocmoc.toggles.autoquest then
             local completeQuest = game.ReplicatedStorage.Events.CompleteQuestFromPool
             completeQuest:FireServer("Polar Bear")
             completeQuest:FireServer("Brown Bear 2")
@@ -4535,7 +4531,7 @@ task.spawn(function()
             if kocmoc.toggles.autoquesthoneybee then
                 completeQuest:FireServer("Honey Bee")
             end
-        end
+        end]]
         gainedhoneylabel:UpdateText("Gained Honey: " .. api.suffixstring(temptable.honeycurrent - temptable.honeystart))
         uptimelabel:UpdateText("Uptime: " .. truncatetime(math.round(tick() - temptable.starttime)))
     end
