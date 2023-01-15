@@ -2267,7 +2267,7 @@ function formatString(Planter, Field, Nectar)
 end
 
 local Config = {
-    WindowName = "Orangina v" .. temptable.version .. " Remastered By OrangeIsTheColour",
+    WindowName = "mr nirgga 👴🏿 v" .. temptable.version .. "",
     Color = Color3.fromRGB(255, 128, 0),
     Keybind = Enum.KeyCode.Semicolon
 }
@@ -2287,7 +2287,7 @@ local itemstab = Window:CreateTab("Items")
 local plantertab = Window:CreateTab("Planters")
 local misctab = Window:CreateTab("Misc")
 local setttab = Window:CreateTab("Settings")
---[[ local premiumtab = Window:CreateTab("Premium") ]]
+-- local premiumtab = Window:CreateTab("Premium")
 
 local loadingInfo = hometab:CreateSection("Startup")
 local loadingFunctions = loadingInfo:CreateLabel("Loading Functions..")
@@ -2305,18 +2305,9 @@ information:CreateLabel(Danger.." - Not Safe Function")
 information:CreateLabel("⚙ - Configurable Function")
 information:CreateLabel("📜 - May be exploit specific")
 information:CreateLabel(Beesmas.." - Beesmas Function")
-information:CreateLabel("Script by OrangeIsTheColor")
-information:CreateLabel("With help from Sakata#4939")
-information:CreateLabel("Originally by weuz_, mrdevl")
-information:CreateLabel("and RoseGold#5441")
 local gainedhoneylabel = information:CreateLabel("Gained Honey: 0")
 local uptimelabel = information:CreateLabel("Uptime: 0")
-information:CreateButton("Discord Invite", function()
-    setclipboard("https://discord.gg/BMmfQ6ZUxP")
-end):AddToolTip("It will copy the Discord link to your clipboard!")
-information:CreateButton("Donation", function()
-    setclipboard("https://www.paypal.com/paypalme/oranginabss")
-end)
+
 --[[
 guiElements["toggles"]["enablestatuspanel"] = information:CreateToggle("Status Panel", true, function(bool)
     kocmoc.toggles.enablestatuspanel = bool
@@ -2326,7 +2317,8 @@ guiElements["toggles"]["enablestatuspanel"] = information:CreateToggle("Status P
             v.Visible = bool
         end
     end
-end)]]
+end)
+]]
 
 local disableenable = hometab:CreateSection("Disable all or Enable all")
 disableenable:CreateButton("Disable All Functions", function()
