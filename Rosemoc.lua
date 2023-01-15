@@ -19,9 +19,9 @@ getgenv().Identify = Identify_
 
 -- API CALLS
 
-local library = loadstring(game:HttpGet(""))()
-getgenv().api = loadstring(game:HttpGet(""))()
-local bssapi = loadstring(game:HttpGet(""))()
+local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/kuutti53823/Orangina/main/Library.lua"))()
+getgenv().api = loadstring(game:HttpGet("https://raw.githubusercontent.com/kuutti53823/Orangina/main/API.lua"))()
+local bssapi = loadstring(game:HttpGet("https://raw.githubusercontent.com/kuutti53823/Orangina/main/BSSAPI.lua"))()
 local httpreq = (syn and syn.request) or http_request or (http and http.request) or request
 
 if not isfolder("kocmoc") then makefolder("kocmoc") end
@@ -2647,8 +2647,8 @@ guiElements["toggles"]["autoant"] = autoanttoggle
 
 local serverhopkill = combtab:CreateSection("Serverhopping Combat")
 serverhopkill:CreateButton("Vicious Bee Serverhopper ["..Danger.."]["..ExploitSpecific.."]", function()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/Ericd71/skiP/main/viciousbeeserverhop.lua"))()
-end):AddToolTip("Serverhops for rouge vicious bees")
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/kuutti53823/Orangina/main/viciousbeeserverhop.lua"))()
+end):AddToolTip("Serverhops for rogue vicious bees")
 serverhopkill:CreateLabel("")
 serverhopkill:CreateLabel("["..Danger.."] These functions will unload the UI")
 serverhopkill:CreateLabel("")
@@ -4868,7 +4868,7 @@ end)
 loadingLoops:UpdateText("Loaded Loops")
 pcall(function()
 getgenv().betakey = tostring(VybfVlKAt3h03dqDsMaI)
-if getgenv().beta and getgenv().betakey and getgenv().betakey == "WBxcC8rmnlFBnN1OXmpV" or game.Players.LocalPlayer.Name == "5upit" or not getgenv().beta then
+if getgenv().beta and getgenv().betakey and getgenv().betakey == "WBxcC8rmnlFBnN1OXmpV" or not getgenv().beta then
     --starts sexing
     else
     while true do end
