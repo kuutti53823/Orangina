@@ -5326,10 +5326,9 @@ if loadRecent and isfile('kocmoc/recent.json') then
     else
         for _,v in pairs(menuTabs:GetChildren()) do
             if v:FindFirstChild("Icon") and v.Icon.Image == "rbxassetid://1436835355" then
-                set_thread_identity(2)
+                task.wait(20)
                 VirtualInputManager:SendMouseButtonEvent(65, 94, 0, true, game, 1)
                 VirtualInputManager:SendMouseButtonEvent(65, 94, 0, false, game, 1)
-                set_thread_identity(7)
             end
         end
     end
@@ -5466,10 +5465,9 @@ if autoload then
     else
         for _,v in pairs(menuTabs:GetChildren()) do
             if v:FindFirstChild("Icon") and v.Icon.Image == "rbxassetid://1436835355" then
-                set_thread_identity(2)
+                task.wait(20)
                 VirtualInputManager:SendMouseButtonEvent(65, 94, 0, true, game, 1)
                 VirtualInputManager:SendMouseButtonEvent(65, 94, 0, false, game, 1)
-                set_thread_identity(7)
             end
         end
     end
