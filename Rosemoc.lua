@@ -138,7 +138,6 @@ getgenv().temptable = {
     honeycurrent = statstable.Totals.Honey,
     dead = false,
     float = false,
-    pepsiautodig = false,
     alpha = false,
     beta = false,
     myhiveis = false,
@@ -518,7 +517,6 @@ getgenv().kocmoc = {
         npcprefer = "All Quests",
         farmtype = "Walk",
         monstertimer = 15,
-        autodigmode = "Normal",
         donoItem = "Coconut",
         donoAmount = 25,
         selectedTreat = "Treat",
@@ -2344,8 +2342,6 @@ autofarmtoggle:CreateKeybind(nil, function(Key) end)
 guiElements["toggles"]["autodig"] = farmo:CreateToggle("Autodig", nil, function(State)
     kocmoc.toggles.autodig = State
 end)
-guiElements["vars"]["autodigmode"] = farmo:CreateDropdown("Autodig Mode", {"Normal", "Collector Steal"}, function(Option) kocmoc.vars.autodigmode = Option end)
-
 local contt = farmtab:CreateSection("Container Tools")
 guiElements["toggles"]["disableconversion"] = contt:CreateToggle("Don't Convert Pollen", nil, function(State)
     kocmoc.toggles.disableconversion = State
@@ -4194,29 +4190,13 @@ task.spawn(function()
     end
 end)
 
-task.spawn(function()
-    while task.wait(0.05) do
-        if kocmoc.toggles.autodig then
-            pcall(function()
-            if player then
-                if player.Character then
-                    if player.Character:FindFirstChildOfClass("Tool") then
-                        if player.Character:FindFirstChildOfClass("Tool"):FindFirstChild("ClickEvent", true) then
-                            tool = game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool") or nil
-                            local tool = player.Character:FindFirstChildOfClass("Tool")
-                        end
-                    end
-                end
-                if tool then
-                getsenv(tool.ClientScriptMouse).collectStart(game:GetService("Players").LocalPlayer:GetMouse())
-                end 
-                end
-                collectorSteal()
-                workspace.NPCs.Onett.Onett["Porcelain Dipper"].ClickEvent:FireServer() 
-            end)
-        end
+task.spawn(function() while task.wait(0.001) do
+    if kocmoc.toggles.autodig then 
+        if game.Players.LocalPlayer and game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool") and game.Players.LocalPlayer.Character:FindFirstChildOfClass('Tool'):FindFirstChild('ClientScriptMouse') then
+            pcall(function()getsenv(game.Players.LocalPlayer.Character:FindFirstChildOfClass('Tool').ClientScriptMouse).collectStart()end)
+        end 
     end
-end)
+end end)
 
 task.spawn(function()
     while task.wait() do
