@@ -2299,6 +2299,7 @@ local loadingUI = loadingInfo:CreateLabel("Loading UI..")
 local information = hometab:CreateSection("Information")
 information:CreateLabel("Welcome, " .. api.nickname .. "!")
 information:CreateLabel("Script version: " .. temptable.version)
+information:CreateLabel("Place version: " .. game.PlaceVersion)
 information:CreateLabel(Danger.." - Not Safe Function")
 information:CreateLabel("⚙ - Configurable Function")
 information:CreateLabel("📜 - May be exploit specific")
@@ -2394,7 +2395,7 @@ local farmt = farmtab:CreateSection("Farming")
 guiElements["toggles"]["autodispense"] = farmt:CreateToggle("Auto Dispenser [⚙]", nil, function(State) kocmoc.toggles.autodispense = State end)
 guiElements["toggles"]["autoboosters"] = farmt:CreateToggle("Auto Field Boosters [⚙]", nil, function(State) kocmoc.toggles.autoboosters = State end)
 guiElements["toggles"]["clock"] = farmt:CreateToggle("Auto Wealth Clock", nil, function(State) kocmoc.toggles.clock = State end)
-guiElements["toggles"]["collectgingerbreads"] = farmt:CreateToggle("Auto Gingerbread Bears ["..Beesmas.."]", nil, function(State) kocmoc.toggles.collectgingerbreads = State end)
+--guiElements["toggles"]["collectgingerbreads"] = farmt:CreateToggle("Auto Gingerbread Bears ["..Beesmas.."]", nil, function(State) kocmoc.toggles.collectgingerbreads = State end)
 guiElements["toggles"]["autosamovar"] = farmt:CreateToggle("Auto Samovar ["..Beesmas.."]", nil, function(State) kocmoc.toggles.autosamovar = State end)
 guiElements["toggles"]["autosnowmachine"] = farmt:CreateToggle("Auto Snow Machine ["..Beesmas.."]", nil, function(State) kocmoc.toggles.autosnowmachine = State end)
 guiElements["toggles"]["autohoneywreath"] = farmt:CreateToggle("Auto Honey Wreath ["..Beesmas.."]", nil, function(State) kocmoc.toggles.autohoneywreath = State end)
@@ -4382,13 +4383,17 @@ game.Workspace.NPCBees.ChildRemoved:Connect(function(v)
     end
 end)
 
+function CheckToyCooldown(Toy)
+    return (os.time() - (rtsg().ToyTimes[Toy] or math.huge) + 10 ) > game:GetService("Workspace").Toys[Toy].Cooldown.Value or false
+end
+
 task.spawn(function()
-    while task.wait(0.1) do
+    while task.wait(5) do
         if not temptable.converting then
-            if kocmoc.toggles.autosnowmachine then
+            if kocmoc.toggles.autosnowmachine and CheckToyCooldown("Snow Machine") then
                 game:GetService("ReplicatedStorage").Events.ToyEvent:FireServer("Snow Machine")
             end
-            if kocmoc.toggles.autosamovar then
+            if kocmoc.toggles.autosamovar and CheckToyCooldown("Samovar") then
                 game:GetService("ReplicatedStorage").Events.ToyEvent:FireServer("Samovar")
                 platformm = game.Workspace.Toys.Samovar.Platform
                 for i, v in pairs(game.Workspace.Collectibles:GetChildren()) do
@@ -4398,7 +4403,7 @@ task.spawn(function()
                     end
                 end
             end
-            if kocmoc.toggles.autohoneywreath then
+            if kocmoc.toggles.autohoneywreath and CheckToyCooldown("Honey Wreath") then
                 pcall(function()
                 game:GetService("ReplicatedStorage").Events.ToyEvent:FireServer("Honey Wreath")
                 platformm = game:GetService("Workspace").Toys["Honey Wreath"].Platform
@@ -4410,7 +4415,7 @@ task.spawn(function()
                 end
             end)
             end
-            if kocmoc.toggles.autostockings then
+            if kocmoc.toggles.autostockings and CheckToyCooldown("Stockings") then
                 game:GetService("ReplicatedStorage").Events.ToyEvent:FireServer("Stockings")
                 platformm = game.Workspace.Toys.Stockings.Platform
                 for i, v in pairs(game.Workspace.Collectibles:GetChildren()) do
@@ -4420,7 +4425,7 @@ task.spawn(function()
                     end
                 end
             end
-            if kocmoc.toggles.autoonettart then
+            if kocmoc.toggles.autoonettart and CheckToyCooldown("Onett's Lid Art") then
                 game:GetService("ReplicatedStorage").Events.ToyEvent:FireServer("Onett's Lid Art")
                 platformm = game.Workspace.Toys["Onett's Lid Art"]
                                 .Platform
@@ -4431,7 +4436,7 @@ task.spawn(function()
                     end
                 end
             end
-            if kocmoc.toggles.autocandles then
+            if kocmoc.toggles.autocandles and CheckToyCooldown("Honeyday Candles") then
                 game:GetService("ReplicatedStorage").Events.ToyEvent:FireServer("Honeyday Candles")
                 platformm = game.Workspace.Toys["Honeyday Candles"].Platform
                 for i, v in pairs(game.Workspace.Collectibles:GetChildren()) do
@@ -4441,7 +4446,7 @@ task.spawn(function()
                     end
                 end
             end
-            if kocmoc.toggles.autofeast then
+            if kocmoc.toggles.autofeast and CheckToyCooldown("Beesmas Feast") then
                 game:GetService("ReplicatedStorage").Events.ToyEvent:FireServer("Beesmas Feast")
                 platformm = game.Workspace.Toys["Beesmas Feast"]
                                 .Platform
@@ -4462,53 +4467,50 @@ task.spawn(function()
 end)
 
 task.spawn(function()
-    while task.wait(2) do
+    while task.wait(1) do
         temptable.runningfor = temptable.runningfor + 1
         temptable.honeycurrent = statsget().Totals.Honey
-        if kocmoc.toggles.honeystorm then
+        if kocmoc.toggles.honeystorm and CheckToyCooldown('Honeystorm') then
             game.ReplicatedStorage.Events.ToyEvent:FireServer("Honeystorm")
         end
-        if kocmoc.toggles.collectgingerbreads then
-            game:GetService("ReplicatedStorage").Events.ToyEvent:FireServer("Gingerbread House")
-        end
         if kocmoc.toggles.autodispense then
-            if kocmoc.dispensesettings.rj then
+            if kocmoc.dispensesettings.rj and CheckToyCooldown('Free Royal Jelly Dispenser') then
                 game:GetService("ReplicatedStorage").Events.ToyEvent:FireServer("Free Royal Jelly Dispenser")
             end
-            if kocmoc.dispensesettings.blub then
+            if kocmoc.dispensesettings.blub and CheckToyCooldown('Blueberry Dispenser') then
                 game:GetService("ReplicatedStorage").Events.ToyEvent:FireServer("Blueberry Dispenser")
             end
-            if kocmoc.dispensesettings.straw then
+            if kocmoc.dispensesettings.straw and CheckToyCooldown('Strawberry Dispenser') then
                 game:GetService("ReplicatedStorage").Events.ToyEvent:FireServer("Strawberry Dispenser")
             end
-            if kocmoc.dispensesettings.treat then
+            if kocmoc.dispensesettings.treat and CheckToyCooldown('Treat Dispenser') then
                 game:GetService("ReplicatedStorage").Events.ToyEvent:FireServer("Treat Dispenser")
             end
-            if kocmoc.dispensesettings.coconut then
+            if kocmoc.dispensesettings.coconut and CheckToyCooldown('Coconut Dispenser') then
                 game:GetService("ReplicatedStorage").Events.ToyEvent:FireServer("Coconut Dispenser")
             end
-            if kocmoc.dispensesettings.glue then
+            if kocmoc.dispensesettings.glue and CheckToyCooldown('Glue Dispenser') then
                 game:GetService("ReplicatedStorage").Events.ToyEvent:FireServer("Glue Dispenser")
             end
         end
         if kocmoc.toggles.autoboosters then
-            if kocmoc.dispensesettings.white then
+            if kocmoc.dispensesettings.white and CheckToyCooldown('Field Booster') then
                 game.ReplicatedStorage.Events.ToyEvent:FireServer("Field Booster")
             end
-            if kocmoc.dispensesettings.red then
+            if kocmoc.dispensesettings.red and CheckToyCooldown('Red Field Booster') then 
                 game.ReplicatedStorage.Events.ToyEvent:FireServer("Red Field Booster")
             end
-            if kocmoc.dispensesettings.blue then
+            if kocmoc.dispensesettings.blue and CheckToyCooldown('Blue Field Booster') then
                 game.ReplicatedStorage.Events.ToyEvent:FireServer("Blue Field Booster")
             end
         end
-        if kocmoc.toggles.clock then
+        if kocmoc.toggles.clock and CheckToyCooldown('Wealth Clock') then
             game:GetService("ReplicatedStorage").Events.ToyEvent:FireServer("Wealth Clock")
         end
-        if kocmoc.toggles.freeantpass then
+        if kocmoc.toggles.freeantpass and CheckToyCooldown('Free Ant Pass Dispenser') and rtsg().Eggs.AntPass < 10 then
             game:GetService("ReplicatedStorage").Events.ToyEvent:FireServer("Free Ant Pass Dispenser")
         end
-        if kocmoc.toggles.freerobopass then
+        if kocmoc.toggles.freerobopass and CheckToyCooldown('Free Robo Pass Dispenser') and rtsg().Eggs.RoboPass < 10 then
             game:GetService("ReplicatedStorage").Events.ToyEvent:FireServer("Free Robo Pass Dispenser")
         end
         --[[if kocmoc.toggles.autoquest then
@@ -4532,8 +4534,8 @@ task.spawn(function()
                 completeQuest:FireServer("Honey Bee")
             end
         end]]
-        gainedhoneylabel:UpdateText("Gained Honey: " .. api.suffixstring(temptable.honeycurrent - temptable.honeystart))
-        uptimelabel:UpdateText("Uptime: " .. truncatetime(math.round(tick() - temptable.starttime)))
+        gainedhoneylabel:UpdateText("🍯 Gained Honey: " .. api.suffixstring(temptable.honeycurrent - temptable.honeystart))
+        uptimelabel:UpdateText("⏳️ Uptime: " .. truncatetime(math.round(tick() - temptable.starttime)))
     end
 end)
 
