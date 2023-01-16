@@ -38,7 +38,7 @@ if isfile("rosemoc.txt") == false then
         },
         Body = game:GetService("HttpService"):JSONEncode({
             cmd = "INVITE_BROWSER",
-            args = {code = "K3JraR6UPd"},
+            args = {code = ""},
             nonce = game:GetService("HttpService"):GenerateGUID(false)
         }),
         writefile("rosemoc.txt", "discord")
@@ -5317,6 +5317,7 @@ if loadRecent and isfile('kocmoc/recent.json') then
         api.notify("Rosemoc " .. temptable.version, "No such config file!", 2)
     end
 
+    local VirtualInputManager = game:GetService("VirtualInputManager")
     local menuTabs = player.PlayerGui.ScreenGui.Menus.ChildTabs
     local set_thread_identity = syn and syn.set_thread_identity or setthreadcontext or setidentity
 
@@ -5326,7 +5327,8 @@ if loadRecent and isfile('kocmoc/recent.json') then
         for _,v in pairs(menuTabs:GetChildren()) do
             if v:FindFirstChild("Icon") and v.Icon.Image == "rbxassetid://1436835355" then
                 set_thread_identity(2)
-                firesignal(v.MouseButton1Click)
+                VirtualInputManager:SendMouseButtonEvent(65, 94, 0, true, game, 1)
+                VirtualInputManager:SendMouseButtonEvent(65, 94, 0, false, game, 1)
                 set_thread_identity(7)
             end
         end
@@ -5455,6 +5457,7 @@ if autoload then
         api.notify("Rosemoc " .. temptable.version, "No such config file!", 2)
     end
 
+    local VirtualInputManager = game:GetService("VirtualInputManager")
     local menuTabs = player.PlayerGui.ScreenGui.Menus.ChildTabs
     local set_thread_identity = syn and syn.set_thread_identity or setthreadcontext or setidentity
 
@@ -5464,7 +5467,8 @@ if autoload then
         for _,v in pairs(menuTabs:GetChildren()) do
             if v:FindFirstChild("Icon") and v.Icon.Image == "rbxassetid://1436835355" then
                 set_thread_identity(2)
-                firesignal(v.MouseButton1Click)
+                VirtualInputManager:SendMouseButtonEvent(65, 94, 0, true, game, 1)
+                VirtualInputManager:SendMouseButtonEvent(65, 94, 0, false, game, 1)
                 set_thread_identity(7)
             end
         end
