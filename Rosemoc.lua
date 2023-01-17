@@ -4375,7 +4375,7 @@ end
 
 task.spawn(function()
     while task.wait(5) do
-        if not temptable.converting then
+        if not temptable.converting and not temptable.started.ant and not temptable.started.monsters and not temptable.planting then
             if kocmoc.toggles.autosnowmachine and CheckToyCooldown("Snow Machine") and game:GetService("Workspace").Toys['Snow Machine']:FindFirstChild("ModelAfter") then
                 repeat api.teleport(CFrame.new(ToysFolder['Snow Machine'].Platform.CFrame.Position) * CFrame.new(0,3,0)) task.wait() VirtualPressButton('E') until not CheckToyCooldown('Snow Machine')
             end
@@ -4441,6 +4441,49 @@ task.spawn(function()
                     end
                 end
             end
+            if kocmoc.toggles.honeystorm and CheckToyCooldown('Honeystorm') then
+                repeat api.teleport(CFrame.new(ToysFolder['Honeystorm'].Platform.CFrame.Position) * CFrame.new(0,3,0)) task.wait() VirtualPressButton('E') until not CheckToyCooldown('Honeystorm')
+            end
+            if kocmoc.toggles.autodispense then
+                if kocmoc.dispensesettings.rj and CheckToyCooldown('Free Royal Jelly Dispenser') then
+                    repeat api.teleport(CFrame.new(ToysFolder['Free Royal Jelly Dispenser'].Platform.CFrame.Position) * CFrame.new(0,3,0)) task.wait() VirtualPressButton('E') until not CheckToyCooldown('Free Royal Jelly Dispenser')
+                end
+                if kocmoc.dispensesettings.blub and CheckToyCooldown('Blueberry Dispenser') then
+                    repeat api.teleport(CFrame.new(ToysFolder['Blueberry Dispenser'].Platform.CFrame.Position) * CFrame.new(0,3,0)) task.wait() VirtualPressButton('E') until not CheckToyCooldown('Blueberry Dispenser')
+                end
+                if kocmoc.dispensesettings.straw and CheckToyCooldown('Strawberry Dispenser') then
+                    repeat api.teleport(CFrame.new(ToysFolder['Strawberry Dispenser'].Platform.CFrame.Position) * CFrame.new(0,3,0)) task.wait() VirtualPressButton('E') until not CheckToyCooldown('Strawberry Dispenser')
+                end
+                if kocmoc.dispensesettings.treat and CheckToyCooldown('Treat Dispenser') then
+                    repeat api.teleport(CFrame.new(ToysFolder['Treat Dispenser'].Platform.CFrame.Position) * CFrame.new(0,3,0)) task.wait() VirtualPressButton('E') until not CheckToyCooldown('Treat Dispenser')
+                end
+                if kocmoc.dispensesettings.coconut and CheckToyCooldown('Coconut Dispenser') then
+                    repeat api.teleport(CFrame.new(ToysFolder['Coconut Dispenser'].Platform.CFrame.Position) * CFrame.new(0,3,0)) task.wait() VirtualPressButton('E') until not CheckToyCooldown('Coconut Dispenser')
+                end
+                if kocmoc.dispensesettings.glue and CheckToyCooldown('Glue Dispenser') then
+                    repeat api.teleport(CFrame.new(ToysFolder['Glue Dispenser'].Platform.CFrame.Position) * CFrame.new(0,3,0)) task.wait() VirtualPressButton('E') until not CheckToyCooldown('Glue Dispenser')
+                end
+            end
+            if kocmoc.toggles.autoboosters then
+                if kocmoc.dispensesettings.white and CheckToyCooldown('Field Booster') then
+                    repeat api.teleport(CFrame.new(ToysFolder['Field Booster'].Platform.CFrame.Position) * CFrame.new(0,3,0)) task.wait() VirtualPressButton('E') until not CheckToyCooldown('Field Booster')
+                end
+                if kocmoc.dispensesettings.red and CheckToyCooldown('Red Field Booster') then 
+                    repeat api.teleport(CFrame.new(ToysFolder['Red Field Booster'].Platform.CFrame.Position) * CFrame.new(0,3,0)) task.wait() VirtualPressButton('E') until not CheckToyCooldown('Red Field Booster') 
+                end
+                if kocmoc.dispensesettings.blue and CheckToyCooldown('Blue Field Booster') then
+                    repeat api.teleport(CFrame.new(ToysFolder['Blue Field Booster'].Platform.CFrame.Position) * CFrame.new(0,3,0)) task.wait() VirtualPressButton('E') until not CheckToyCooldown('Blue Field Booster') 
+                end
+            end
+            if kocmoc.toggles.clock and CheckToyCooldown('Wealth Clock') then
+                repeat api.teleport(CFrame.new(ToysFolder['Wealth Clock'].Platform.CFrame.Position) * CFrame.new(0,3,0)) task.wait() VirtualPressButton('E') until not CheckToyCooldown('Wealth Clock') 
+            end
+            if kocmoc.toggles.freeantpass and CheckToyCooldown('Free Ant Pass Dispenser') and rtsg().Eggs.AntPass < 10 then
+                repeat api.teleport(CFrame.new(ToysFolder['Free Ant Pass Dispenser'].Platform.CFrame.Position) * CFrame.new(0,3,0)) task.wait() VirtualPressButton('E') until not CheckToyCooldown('Free Ant Pass Dispenser') 
+            end
+            if kocmoc.toggles.freerobopass and CheckToyCooldown('Free Robo Pass Dispenser') and rtsg().Eggs.RoboPass < 10 then
+                repeat api.teleport(CFrame.new(ToysFolder['Free Robo Pass Dispenser'].Platform.CFrame.Position) * CFrame.new(0,3,0)) task.wait() VirtualPressButton('E') until not CheckToyCooldown('Free Robo Pass Dispenser') 
+            end
             if kocmoc.toggles.autodonate then
                 if isWindshrineOnCooldown() == false then
                     donateToShrine(kocmoc.vars.donoItem, kocmoc.vars.donoAmount)
@@ -4454,49 +4497,6 @@ task.spawn(function()
     while task.wait(2) do
         temptable.runningfor = temptable.runningfor + 1
         temptable.honeycurrent = statsget().Totals.Honey
-        if kocmoc.toggles.honeystorm and CheckToyCooldown('Honeystorm') then
-            repeat api.teleport(CFrame.new(ToysFolder['Honeystorm'].Platform.CFrame.Position) * CFrame.new(0,3,0)) task.wait() VirtualPressButton('E') until not CheckToyCooldown('Honeystorm')
-        end
-        if kocmoc.toggles.autodispense then
-            if kocmoc.dispensesettings.rj and CheckToyCooldown('Free Royal Jelly Dispenser') then
-                repeat api.teleport(CFrame.new(ToysFolder['Free Royal Jelly Dispenser'].Platform.CFrame.Position) * CFrame.new(0,3,0)) task.wait() VirtualPressButton('E') until not CheckToyCooldown('Free Royal Jelly Dispenser')
-            end
-            if kocmoc.dispensesettings.blub and CheckToyCooldown('Blueberry Dispenser') then
-                repeat api.teleport(CFrame.new(ToysFolder['Blueberry Dispenser'].Platform.CFrame.Position) * CFrame.new(0,3,0)) task.wait() VirtualPressButton('E') until not CheckToyCooldown('Blueberry Dispenser')
-            end
-            if kocmoc.dispensesettings.straw and CheckToyCooldown('Strawberry Dispenser') then
-                repeat api.teleport(CFrame.new(ToysFolder['Strawberry Dispenser'].Platform.CFrame.Position) * CFrame.new(0,3,0)) task.wait() VirtualPressButton('E') until not CheckToyCooldown('Strawberry Dispenser')
-            end
-            if kocmoc.dispensesettings.treat and CheckToyCooldown('Treat Dispenser') then
-                repeat api.teleport(CFrame.new(ToysFolder['Treat Dispenser'].Platform.CFrame.Position) * CFrame.new(0,3,0)) task.wait() VirtualPressButton('E') until not CheckToyCooldown('Treat Dispenser')
-            end
-            if kocmoc.dispensesettings.coconut and CheckToyCooldown('Coconut Dispenser') then
-                repeat api.teleport(CFrame.new(ToysFolder['Coconut Dispenser'].Platform.CFrame.Position) * CFrame.new(0,3,0)) task.wait() VirtualPressButton('E') until not CheckToyCooldown('Coconut Dispenser')
-            end
-            if kocmoc.dispensesettings.glue and CheckToyCooldown('Glue Dispenser') then
-                repeat api.teleport(CFrame.new(ToysFolder['Glue Dispenser'].Platform.CFrame.Position) * CFrame.new(0,3,0)) task.wait() VirtualPressButton('E') until not CheckToyCooldown('Glue Dispenser')
-            end
-        end
-        if kocmoc.toggles.autoboosters then
-            if kocmoc.dispensesettings.white and CheckToyCooldown('Field Booster') then
-                repeat api.teleport(CFrame.new(ToysFolder['Field Booster'].Platform.CFrame.Position) * CFrame.new(0,3,0)) task.wait() VirtualPressButton('E') until not CheckToyCooldown('Field Booster')
-            end
-            if kocmoc.dispensesettings.red and CheckToyCooldown('Red Field Booster') then 
-                repeat api.teleport(CFrame.new(ToysFolder['Red Field Booster'].Platform.CFrame.Position) * CFrame.new(0,3,0)) task.wait() VirtualPressButton('E') until not CheckToyCooldown('Red Field Booster') 
-            end
-            if kocmoc.dispensesettings.blue and CheckToyCooldown('Blue Field Booster') then
-                repeat api.teleport(CFrame.new(ToysFolder['Blue Field Booster'].Platform.CFrame.Position) * CFrame.new(0,3,0)) task.wait() VirtualPressButton('E') until not CheckToyCooldown('Blue Field Booster') 
-            end
-        end
-        if kocmoc.toggles.clock and CheckToyCooldown('Wealth Clock') then
-            repeat api.teleport(CFrame.new(ToysFolder['Wealth Clock'].Platform.CFrame.Position) * CFrame.new(0,3,0)) task.wait() VirtualPressButton('E') until not CheckToyCooldown('Wealth Clock') 
-        end
-        if kocmoc.toggles.freeantpass and CheckToyCooldown('Free Ant Pass Dispenser') and rtsg().Eggs.AntPass < 10 then
-            repeat api.teleport(CFrame.new(ToysFolder['Free Ant Pass Dispenser'].Platform.CFrame.Position) * CFrame.new(0,3,0)) task.wait() VirtualPressButton('E') until not CheckToyCooldown('Free Ant Pass Dispenser') 
-        end
-        if kocmoc.toggles.freerobopass and CheckToyCooldown('Free Robo Pass Dispenser') and rtsg().Eggs.RoboPass < 10 then
-            repeat api.teleport(CFrame.new(ToysFolder['Free Robo Pass Dispenser'].Platform.CFrame.Position) * CFrame.new(0,3,0)) task.wait() VirtualPressButton('E') until not CheckToyCooldown('Free Robo Pass Dispenser') 
-        end
         gainedhoneylabel:UpdateText("🍯 Gained Honey: " .. api.suffixstring(temptable.honeycurrent - temptable.honeystart))
         uptimelabel:UpdateText("⏳️ Uptime: " .. truncatetime(math.round(tick() - temptable.starttime)))
     end
