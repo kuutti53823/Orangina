@@ -1619,7 +1619,7 @@ function docrosshairs()
 end
 
 
-function makequests()
+--[[function makequests()
     for i, v in next, game.Workspace.NPCs:GetChildren() do
         if v.Name ~= "Ant Challenge Info" and v.Name ~= "Bubble Bee Man 2" and v.Name ~= "Wind Shrine" and v.Name ~= "Gummy Bear" and v.Name ~= "Honey Bee" then
             if v:FindFirstChild("Platform") then
@@ -1662,8 +1662,36 @@ function makequests()
         end
     end
 end
+]]
 
-getgenv().Tvk1 = {true, "💖"}
+function makequests()
+    pcall(function()
+    for i,v in next, game:GetService("Workspace").NPCs:GetChildren() do
+        if v.Name ~= "Ant Challenge Info" and v.Name ~= "Bubble Bee Man 2" and v.Name ~= "Wind Shrine" and v.Name ~= "Gummy Bear" then if v:FindFirstChild("Platform") then if v.Platform:FindFirstChild("AlertPos") then if v.Platform.AlertPos:FindFirstChild("AlertGui") then if v.Platform.AlertPos.AlertGui:FindFirstChild("ImageLabel") then
+            image = v.Platform.AlertPos.AlertGui.ImageLabel
+            button = game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui.ActivateButton.MouseButton1Click
+            if image.ImageTransparency == 0 then
+                if kocmoc.toggles.tptonpc then
+                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(v.Platform.Position.X, v.Platform.Position.Y+3, v.Platform.Position.Z)
+                    task.wait(1)
+                else
+                    api.tween(2,CFrame.new(v.Platform.Position.X, v.Platform.Position.Y+3, v.Platform.Position.Z))
+                    task.wait(3)
+                end
+                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(v.Platform.Position.X, v.Platform.Position.Y+3, v.Platform.Position.Z)
+                task.wait(.1)
+                VirtualPressButton('E')
+                task.wait(8)
+                if image.ImageTransparency == 0 then
+                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(v.Platform.Position.X, v.Platform.Position.Y+3, v.Platform.Position.Z)
+                    task.wait(.1)
+                    VirtualPressButton('E')
+                end
+                task.wait(2)
+            end
+        end     
+    end end end end end end)
+end
 
 local function donateToShrine(item, qnt)
     print(qnt)
