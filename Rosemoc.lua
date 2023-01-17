@@ -1255,6 +1255,7 @@ function collectplanters()
     end
 end
 game.Workspace.Collectibles.ChildAdded:Connect(function(r)
+    if kocmoc.toggles.autofarm then
     if r:FindFirstChildOfClass("Decal") then
         local aaaaaaaa = string.split(r:FindFirstChildOfClass("Decal").Texture, "rbxassetid://")[2] --sakata lol xd
         if aaaaaaaa ~= nil and api.findvalue(kocmoc.priority, aaaaaaaa) then
@@ -1271,6 +1272,7 @@ game.Workspace.Collectibles.ChildAdded:Connect(function(r)
             end
         end
     end
+end
 end)
 
 function getprioritytokens()
@@ -1667,7 +1669,7 @@ end
 function makequests()
     pcall(function()
     for i,v in next, game:GetService("Workspace").NPCs:GetChildren() do
-        if v.Name ~= "Ant Challenge Info" and v.Name ~= "Bubble Bee Man 2" and v.Name ~= "Wind Shrine" and v.Name ~= "Gummy Bear" then if v:FindFirstChild("Platform") then if v.Platform:FindFirstChild("AlertPos") then if v.Platform.AlertPos:FindFirstChild("AlertGui") then if v.Platform.AlertPos.AlertGui:FindFirstChild("ImageLabel") then
+        if v.Name ~= "Ant Challenge Info" and v.Name ~= "Bubble Bee Man 2" and v.Name ~= "Honey Bee" and v.Name ~= "Wind Shrine" and v.Name ~= "Gummy Bear" then if v:FindFirstChild("Platform") then if v.Platform:FindFirstChild("AlertPos") then if v.Platform.AlertPos:FindFirstChild("AlertGui") then if v.Platform.AlertPos.AlertGui:FindFirstChild("ImageLabel") then
             image = v.Platform.AlertPos.AlertGui.ImageLabel
             button = game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui.ActivateButton.MouseButton1Click
             if image.ImageTransparency == 0 then
@@ -4405,32 +4407,36 @@ task.spawn(function()
     while task.wait(5) do
         if not temptable.converting and not temptable.started.ant and not temptable.started.monsters and not temptable.planting then
             if kocmoc.toggles.autosnowmachine and CheckToyCooldown("Snow Machine") and game:GetService("Workspace").Toys['Snow Machine']:FindFirstChild("ModelAfter") then
-                repeat api.teleport(CFrame.new(ToysFolder['Snow Machine'].Platform.CFrame.Position) * CFrame.new(0,3,0)) task.wait() VirtualPressButton('E') until not CheckToyCooldown('Snow Machine')
+                api.teleport(CFrame.new(ToysFolder['Snow Machine'].Platform.CFrame.Position) * CFrame.new(0,3,0))
+                game.ReplicatedStorage.Events.ToyEvent:FireServer("Snow Machine")
             end
             if kocmoc.toggles.autosamovar and CheckToyCooldown("Samovar") and game:GetService("Workspace").Toys['Samovar']:FindFirstChild("ModelAfter") then
-                repeat api.teleport(CFrame.new(ToysFolder['Samovar'].Platform.CFrame.Position) * CFrame.new(0,3,0)) task.wait() VirtualPressButton('E') until not CheckToyCooldown('Samovar')
-                platformm = game.Workspace.Toys.Samovar.Platform
-                for i, v in pairs(game.Workspace.Collectibles:GetChildren()) do
-                    if (v.Position - platformm.Position).magnitude < 25 and
-                        v.CFrame.YVector.Y == 1 then
-                        api.humanoidrootpart().CFrame = v.CFrame
+                api.teleport(CFrame.new(ToysFolder['Samovar'].Platform.CFrame.Position) * CFrame.new(0,3,0))
+                game.ReplicatedStorage.Events.ToyEvent:FireServer("Samovar")
+                platformm = game:GetService("Workspace").Toys.Samovar.Platform
+                task.wait(2)
+                for i,v in pairs(game.Workspace.Collectibles:GetChildren()) do
+                    if (v.Position-platformm.Position).magnitude < 25 and v.CFrame.YVector.Y == 1 then
+                        repeat task.wait() api.humanoidrootpart().CFrame = CFrame.new(v.CFrame.Position) until not v or not v.Parent
                     end
-                end
+                end 
             end
             if kocmoc.toggles.autohoneywreath and CheckToyCooldown("Honey Wreath") and game:GetService("Workspace").Toys['Honey Wreath']:FindFirstChild("ModelAfter") then
                 pcall(function()
-                repeat api.teleport(CFrame.new(ToysFolder['Honey Wreath'].Platform.CFrame.Position) * CFrame.new(0,3,0)) task.wait() VirtualPressButton('E') until not CheckToyCooldown('Honey Wreath')
+                api.teleport(CFrame.new(ToysFolder['Honey Wreath'].Platform.CFrame.Position) * CFrame.new(0,3,0))
+                game.ReplicatedStorage.Events.ToyEvent:FireServer("Honey Wreath")
                 platformm = game:GetService("Workspace").Toys["Honey Wreath"].Platform
-                for i, v in pairs(game.Workspace.Collectibles:GetChildren()) do
-                    if (v.Position - platformm.Position).magnitude < 25 and
-                        v.CFrame.YVector.Y == 1 then
-                        api.humanoidrootpart().CFrame = v.CFrame
+                task.wait(2)
+                for i,v in pairs(game.Workspace.Collectibles:GetChildren()) do
+                    if (v.Position-platformm.Position).magnitude < 25 and v.CFrame.YVector.Y == 1 then
+                        repeat task.wait() api.humanoidrootpart().CFrame = CFrame.new(v.CFrame.Position) until not v or not v.Parent
+                    end
                     end
                 end
             end)
-            end
             if kocmoc.toggles.autostockings and CheckToyCooldown("Stockings") and game:GetService("Workspace").Toys['Stockings']:FindFirstChild("ModelAfter") then
-                repeat api.teleport(CFrame.new(ToysFolder['Stockings'].Platform.CFrame.Position) * CFrame.new(0,3,0)) task.wait() VirtualPressButton('E') until not CheckToyCooldown('Stockings')
+                api.teleport(CFrame.new(ToysFolder['Stockings'].Platform.CFrame.Position) * CFrame.new(0,3,0))
+                game.ReplicatedStorage.Events.ToyEvent:FireServer("Stockings")
                 platformm = game.Workspace.Toys.Stockings.Platform
                 for i, v in pairs(game.Workspace.Collectibles:GetChildren()) do
                     if (v.Position - platformm.Position).magnitude < 25 and
@@ -4440,7 +4446,8 @@ task.spawn(function()
                 end
             end
             if kocmoc.toggles.autoonettart and CheckToyCooldown("Onett's Lid Art") and game:GetService("Workspace").Toys["Onett's Lid Art"]:FindFirstChild("ModelAfter") then
-                repeat api.teleport(CFrame.new(ToysFolder["Onett's Lid Art"].Platform.CFrame.Position) * CFrame.new(0,3,0)) task.wait() VirtualPressButton('E') until not CheckToyCooldown("Onett's Lid Art")
+                api.teleport(CFrame.new(ToysFolder["Onett's Lid Art"].Platform.CFrame.Position) * CFrame.new(0,3,0))
+                game.ReplicatedStorage.Events.ToyEvent:FireServer("Onett's Lid Art")
                 platformm = game.Workspace.Toys["Onett's Lid Art"].Platform
                 for i, v in pairs(game.Workspace.Collectibles:GetChildren()) do
                     if (v.Position - platformm.Position).magnitude < 25 and
@@ -4450,7 +4457,8 @@ task.spawn(function()
                 end
             end
             if kocmoc.toggles.autocandles and CheckToyCooldown("Honeyday Candles") and game:GetService("Workspace").Toys['Honeyday Candles']:FindFirstChild("ModelAfter") then
-                repeat api.teleport(CFrame.new(ToysFolder['Honeyday Candles'].Platform.CFrame.Position) * CFrame.new(0,3,0)) task.wait() VirtualPressButton('E') until not CheckToyCooldown('Honeyday Candles')
+                api.teleport(CFrame.new(ToysFolder['Honeyday Candles'].Platform.CFrame.Position) * CFrame.new(0,3,0))
+                game.ReplicatedStorage.Events.ToyEvent:FireServer("Honeyday Candles")
                 platformm = game.Workspace.Toys["Honeyday Candles"].Platform
                 for i, v in pairs(game.Workspace.Collectibles:GetChildren()) do
                     if (v.Position - platformm.Position).magnitude < 25 and
@@ -4460,7 +4468,8 @@ task.spawn(function()
                 end
             end
             if kocmoc.toggles.autofeast and CheckToyCooldown("Beesmas Feast") and game:GetService("Workspace").Toys['Beesmas Feast']:FindFirstChild("ModelAfter") then
-                repeat api.teleport(CFrame.new(ToysFolder['Beesmas Feast'].Platform.CFrame.Position) * CFrame.new(0,3,0)) task.wait() VirtualPressButton('E') until not CheckToyCooldown('Beesmas Feast')
+                api.teleport(CFrame.new(ToysFolder['Beesmas Feast'].Platform.CFrame.Position) * CFrame.new(0,3,0))
+                game.ReplicatedStorage.Events.ToyEvent:FireServer("Beesmas Feast")
                 platformm = game.Workspace.Toys["Beesmas Feast"].Platform
                 for i, v in pairs(game.Workspace.Collectibles:GetChildren()) do
                     if (v.Position - platformm.Position).magnitude < 25 and
@@ -4470,53 +4479,67 @@ task.spawn(function()
                 end
             end
             if kocmoc.toggles.honeystorm and CheckToyCooldown('Honeystorm') then
-                repeat api.teleport(CFrame.new(ToysFolder['Honeystorm'].Platform.CFrame.Position) * CFrame.new(0,3,0)) task.wait() VirtualPressButton('E') until not CheckToyCooldown('Honeystorm')
+                api.teleport(CFrame.new(ToysFolder['Honeystorm'].Platform.CFrame.Position) * CFrame.new(0,3,0))
+                game.ReplicatedStorage.Events.ToyEvent:FireServer("Honeystorm")
             end
             if kocmoc.toggles.autodispense then
                 if kocmoc.dispensesettings.rj and CheckToyCooldown('Free Royal Jelly Dispenser') then
-                    repeat api.teleport(CFrame.new(ToysFolder['Free Royal Jelly Dispenser'].Platform.CFrame.Position) * CFrame.new(0,3,0)) task.wait() VirtualPressButton('E') until not CheckToyCooldown('Free Royal Jelly Dispenser')
+                    api.teleport(CFrame.new(ToysFolder['Free Royal Jelly Dispenser'].Platform.CFrame.Position) * CFrame.new(0,3,0))
+                    game.ReplicatedStorage.Events.ToyEvent:FireServer("Free Royal Jelly Dispenser")
                 end
                 if kocmoc.dispensesettings.blub and CheckToyCooldown('Blueberry Dispenser') then
-                    repeat api.teleport(CFrame.new(ToysFolder['Blueberry Dispenser'].Platform.CFrame.Position) * CFrame.new(0,3,0)) task.wait() VirtualPressButton('E') until not CheckToyCooldown('Blueberry Dispenser')
+                    api.teleport(CFrame.new(ToysFolder['Blueberry Dispenser'].Platform.CFrame.Position) * CFrame.new(0,3,0))
+                    game.ReplicatedStorage.Events.ToyEvent:FireServer("Blueberry Dispenser")
                 end
                 if kocmoc.dispensesettings.straw and CheckToyCooldown('Strawberry Dispenser') then
-                    repeat api.teleport(CFrame.new(ToysFolder['Strawberry Dispenser'].Platform.CFrame.Position) * CFrame.new(0,3,0)) task.wait() VirtualPressButton('E') until not CheckToyCooldown('Strawberry Dispenser')
+                    api.teleport(CFrame.new(ToysFolder['Strawberry Dispenser'].Platform.CFrame.Position) * CFrame.new(0,3,0))
+                    game.ReplicatedStorage.Events.ToyEvent:FireServer("Strawberry Dispenser")
                 end
                 if kocmoc.dispensesettings.treat and CheckToyCooldown('Treat Dispenser') then
-                    repeat api.teleport(CFrame.new(ToysFolder['Treat Dispenser'].Platform.CFrame.Position) * CFrame.new(0,3,0)) task.wait() VirtualPressButton('E') until not CheckToyCooldown('Treat Dispenser')
+                    api.teleport(CFrame.new(ToysFolder['Treat Dispenser'].Platform.CFrame.Position) * CFrame.new(0,3,0))
+                    game.ReplicatedStorage.Events.ToyEvent:FireServer("Treat Dispenser")
                 end
                 if kocmoc.dispensesettings.coconut and CheckToyCooldown('Coconut Dispenser') then
-                    repeat api.teleport(CFrame.new(ToysFolder['Coconut Dispenser'].Platform.CFrame.Position) * CFrame.new(0,3,0)) task.wait() VirtualPressButton('E') until not CheckToyCooldown('Coconut Dispenser')
+                    api.teleport(CFrame.new(ToysFolder['Coconut Dispenser'].Platform.CFrame.Position) * CFrame.new(0,3,0))
+                    game.ReplicatedStorage.Events.ToyEvent:FireServer("Coconut Dispenser")
                 end
                 if kocmoc.dispensesettings.glue and CheckToyCooldown('Glue Dispenser') then
-                    repeat api.teleport(CFrame.new(ToysFolder['Glue Dispenser'].Platform.CFrame.Position) * CFrame.new(0,3,0)) task.wait() VirtualPressButton('E') until not CheckToyCooldown('Glue Dispenser')
+                    api.teleport(CFrame.new(ToysFolder['Glue Dispenser'].Platform.CFrame.Position) * CFrame.new(0,3,0))
+                    game.ReplicatedStorage.Events.ToyEvent:FireServer("Glue Dispenser")
                 end
             end
             if kocmoc.toggles.autoboosters then
                 if kocmoc.dispensesettings.white and CheckToyCooldown('Field Booster') then
-                    repeat api.teleport(CFrame.new(ToysFolder['Field Booster'].Platform.CFrame.Position) * CFrame.new(0,3,0)) task.wait() VirtualPressButton('E') until not CheckToyCooldown('Field Booster')
+                    api.teleport(CFrame.new(ToysFolder['Field Booster'].Platform.CFrame.Position) * CFrame.new(0,3,0))
+                    game.ReplicatedStorage.Events.ToyEvent:FireServer("Field Booster")
                 end
                 if kocmoc.dispensesettings.red and CheckToyCooldown('Red Field Booster') then 
-                    repeat api.teleport(CFrame.new(ToysFolder['Red Field Booster'].Platform.CFrame.Position) * CFrame.new(0,3,0)) task.wait() VirtualPressButton('E') until not CheckToyCooldown('Red Field Booster') 
+                    api.teleport(CFrame.new(ToysFolder['Red Field Booster'].Platform.CFrame.Position) * CFrame.new(0,3,0))
+                    game.ReplicatedStorage.Events.ToyEvent:FireServer("Red Field Booster")
                 end
                 if kocmoc.dispensesettings.blue and CheckToyCooldown('Blue Field Booster') then
-                    repeat api.teleport(CFrame.new(ToysFolder['Blue Field Booster'].Platform.CFrame.Position) * CFrame.new(0,3,0)) task.wait() VirtualPressButton('E') until not CheckToyCooldown('Blue Field Booster') 
+                    api.teleport(CFrame.new(ToysFolder['Blue Field Booster'].Platform.CFrame.Position) * CFrame.new(0,3,0))
+                    game.ReplicatedStorage.Events.ToyEvent:FireServer("Blue Field Booster")
                 end
             end
             if kocmoc.toggles.clock and CheckToyCooldown('Wealth Clock') then
-                repeat api.teleport(CFrame.new(ToysFolder['Wealth Clock'].Platform.CFrame.Position) * CFrame.new(0,3,0)) task.wait() VirtualPressButton('E') until not CheckToyCooldown('Wealth Clock') 
+                api.teleport(CFrame.new(ToysFolder['Wealth Clock'].Platform.CFrame.Position) * CFrame.new(0,3,0))
+                game.ReplicatedStorage.Events.ToyEvent:FireServer("Wealth Clock")
             end
             if kocmoc.toggles.freeantpass and CheckToyCooldown('Free Ant Pass Dispenser') and rtsg().Eggs.AntPass < 10 then
-                repeat api.teleport(CFrame.new(ToysFolder['Free Ant Pass Dispenser'].Platform.CFrame.Position) * CFrame.new(0,3,0)) task.wait() VirtualPressButton('E') until not CheckToyCooldown('Free Ant Pass Dispenser') 
+                api.teleport(CFrame.new(ToysFolder['Free Ant Pass Dispenser'].Platform.CFrame.Position) * CFrame.new(0,3,0))
+                game.ReplicatedStorage.Events.ToyEvent:FireServer("Free Ant Pass Dispenser")
             end
             if kocmoc.toggles.freerobopass and CheckToyCooldown('Free Robo Pass Dispenser') and rtsg().Eggs.RoboPass < 10 then
-                repeat api.teleport(CFrame.new(ToysFolder['Free Robo Pass Dispenser'].Platform.CFrame.Position) * CFrame.new(0,3,0)) task.wait() VirtualPressButton('E') until not CheckToyCooldown('Free Robo Pass Dispenser') 
+                api.teleport(CFrame.new(ToysFolder['Free Robo Pass Dispenser'].Platform.CFrame.Position) * CFrame.new(0,3,0))
+                game.ReplicatedStorage.Events.ToyEvent:FireServer("Free Robo Pass Dispenser")
             end
             if kocmoc.toggles.autodonate then
                 if isWindshrineOnCooldown() == false then
                     donateToShrine(kocmoc.vars.donoItem, kocmoc.vars.donoAmount)
                 end
             end
+        end
         end
     end
 end)
@@ -4649,7 +4672,8 @@ end)
 task.spawn(function()
         while task.wait() do
         if kocmoc.toggles.sproutsummoner and CheckToyCooldown('Sprout Summoner') then
-        repeat api.teleport(CFrame.new(ToysFolder['Sprout Summoner'].Platform.CFrame.Position) * CFrame.new(0,3,0)) task.wait() VirtualPressButton('E') until not CheckToyCooldown('Sprout Summoner')
+        api.teleport(CFrame.new(ToysFolder['Sprout Summoner'].Platform.CFrame.Position) * CFrame.new(0,3,0))
+        game.ReplicatedStorage.Events.ToyEvent:FireServer("Sprout Summoner")
         end
     end
 end)
