@@ -9,7 +9,7 @@ getgenv().Beesmas = "🎄"
 getgenv().beta = isbeta or false
 
 autoload = getgenv().autoload
-loadRecent = getgenv().loadRecent
+--loadRecent = getgenv().loadRecent
 
 --[[
 local Identify_ = math.random(54254252) -- Sakata
@@ -5245,7 +5245,7 @@ task.spawn(function()
         end]]
 end)
 
-if loadRecent and isfile('kocmoc/recent.json') then
+--[[if loadRecent and isfile('kocmoc/recent.json') then
     kocmoc = game:service("HttpService"):JSONDecode(readfile("kocmoc/recent.json"))
             for i,v in pairs(guiElements) do
             for j,k in pairs(v) do
@@ -5292,8 +5292,8 @@ if loadRecent and isfile('kocmoc/recent.json') then
     else
         for _,v in pairs(menuTabs:GetChildren()) do
             if v:FindFirstChild("Icon") and v.Icon.Image == "rbxassetid://1436835355" then
-                VirtualInputManager:SendMouseButtonEvent(65, 94, 0, true, game, 1)
-                VirtualInputManager:SendMouseButtonEvent(65, 94, 0, false, game, 1)
+                --VirtualInputManager:SendMouseButtonEvent(65, 94, 0, true, game, 1)
+                --VirtualInputManager:SendMouseButtonEvent(65, 94, 0, false, game, 1)
             end
         end
     end
@@ -5303,6 +5303,7 @@ task.spawn(function() --Sakata
         writefile("kocmoc/recent.json", game:service("HttpService"):JSONEncode(kocmoc))
     end
 end)
+]]
 
 
 --[[ local CoreGui = game:GetService("CoreGui")
@@ -5429,6 +5430,7 @@ if autoload then
     else
         for _,v in pairs(menuTabs:GetChildren()) do
             if v:FindFirstChild("Icon") and v.Icon.Image == "rbxassetid://1436835355" then
+                task.wait(30)
                 VirtualInputManager:SendMouseButtonEvent(65, 94, 0, true, game, 1)
                 VirtualInputManager:SendMouseButtonEvent(65, 94, 0, false, game, 1)
             end
