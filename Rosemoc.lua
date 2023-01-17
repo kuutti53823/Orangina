@@ -57,6 +57,7 @@ local statstable = playerstatsevent:InvokeServer()
 local monsterspawners = game.Workspace.MonsterSpawners
 local NectarBlacklist = {}
 local rarename
+local ToysFolder = game:GetService('Workspace').Toys
 function rtsg()
     return playerstatsevent:InvokeServer()
 end
@@ -2269,7 +2270,6 @@ local Config = {
     Keybind = Enum.KeyCode.Semicolon
 }
 local Window = library:CreateWindow(Config, game:GetService("CoreGui"))
-Window:Toggle(false)
 
 local guiElements = {
     toggles = {},
@@ -5503,3 +5503,5 @@ end
 if workspace:FindFirstChild("Gates") and workspace.Gates:FindFirstChild("15 Bee Gate") and workspace.Gates["15 Bee Gate"]:FindFirstChild("Frame") then
     game:GetService("Workspace").Gates["15 Bee Gate"].Frame:Destroy()
 end
+Window:Toggle()
+print("loaded")
