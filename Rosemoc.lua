@@ -4621,9 +4621,7 @@ end)
 task.spawn(function()
         while task.wait() do
         if kocmoc.toggles.sproutsummoner and CheckToyCooldown('Sprout Summoner') then
-        repeat api.teleport(CFrame.new(ToysFolder['Sprout Summoner'].Platform.CFrame.Position) * CFrame.new(0,3,0)) task.wait() until not CheckToyCooldown('Sprout Summoner')
-        VirtualInputManager:SendMouseButtonEvent(407, 26, 0, true, game, 1)
-        VirtualInputManager:SendMouseButtonEvent(407, 26, 0, false, game, 1)
+        repeat api.teleport(CFrame.new(ToysFolder['Sprout Summoner'].Platform.CFrame.Position) * CFrame.new(0,3,0)) task.wait() VirtualPressButton('E') until not CheckToyCooldown('Sprout Summoner')
         end
     end
 end)
