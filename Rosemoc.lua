@@ -4431,9 +4431,9 @@ task.spawn(function()
                     if (v.Position-platformm.Position).magnitude < 25 and v.CFrame.YVector.Y == 1 then
                         repeat task.wait() api.humanoidrootpart().CFrame = CFrame.new(v.CFrame.Position) until not v or not v.Parent
                     end
-                    end
                 end
-            end)
+                end)
+            end
             if kocmoc.toggles.autostockings and CheckToyCooldown("Stockings") and game:GetService("Workspace").Toys['Stockings']:FindFirstChild("ModelAfter") then
                 api.teleport(CFrame.new(ToysFolder['Stockings'].Platform.CFrame.Position) * CFrame.new(0,3,0))
                 game.ReplicatedStorage.Events.ToyEvent:FireServer("Stockings")
@@ -4539,7 +4539,6 @@ task.spawn(function()
                     donateToShrine(kocmoc.vars.donoItem, kocmoc.vars.donoAmount)
                 end
             end
-        end
         end
     end
 end)
