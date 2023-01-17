@@ -4370,14 +4370,15 @@ end
 task.spawn(function()
     while task.wait(5) do
         if not temptable.converting then
-            if kocmoc.toggles.autosnowmachine and CheckToyCooldown("Snow Machine") then
+            if kocmoc.toggles.autosnowmachine and CheckToyCooldown("Snow Machine") and game:GetService("Workspace").Toys['Snow Machine']:FindFirstChild("ModelAfter") then
                 repeat api.teleport(CFrame.new(ToysFolder['Snow Machine'].Platform.CFrame.Position) * CFrame.new(0,3,0)) task.wait() until not CheckToyCooldown('Snow Machine')
                 VirtualInputManager:SendMouseButtonEvent(407, 26, 0, true, game, 1)
                 VirtualInputManager:SendMouseButtonEvent(407, 26, 0, false, game, 1)
             end
-            if kocmoc.toggles.autosamovar and CheckToyCooldown("Samovar") then
+            if kocmoc.toggles.autosamovar and CheckToyCooldown("Samovar") and game:GetService("Workspace").Toys['Samovar']:FindFirstChild("ModelAfter") then
                 repeat api.teleport(CFrame.new(ToysFolder['Samovar'].Platform.CFrame.Position) * CFrame.new(0,3,0)) task.wait() until not CheckToyCooldown('Samovar')
-                game:GetService("ReplicatedStorage").Events.ToyEvent:FireServer("Samovar")
+                VirtualInputManager:SendMouseButtonEvent(407, 26, 0, true, game, 1)
+                VirtualInputManager:SendMouseButtonEvent(407, 26, 0, false, game, 1)
                 platformm = game.Workspace.Toys.Samovar.Platform
                 for i, v in pairs(game.Workspace.Collectibles:GetChildren()) do
                     if (v.Position - platformm.Position).magnitude < 25 and
@@ -4386,7 +4387,7 @@ task.spawn(function()
                     end
                 end
             end
-            if kocmoc.toggles.autohoneywreath and CheckToyCooldown("Honey Wreath") then
+            if kocmoc.toggles.autohoneywreath and CheckToyCooldown("Honey Wreath") and game:GetService("Workspace").Toys['Honey Wreath']:FindFirstChild("ModelAfter") then
                 pcall(function()
                 repeat api.teleport(CFrame.new(ToysFolder['Honey Wreath'].Platform.CFrame.Position) * CFrame.new(0,3,0)) task.wait() until not CheckToyCooldown('Honey Wreath')
                 VirtualInputManager:SendMouseButtonEvent(407, 26, 0, true, game, 1)
@@ -4400,7 +4401,7 @@ task.spawn(function()
                 end
             end)
             end
-            if kocmoc.toggles.autostockings and CheckToyCooldown("Stockings") then
+            if kocmoc.toggles.autostockings and CheckToyCooldown("Stockings") and game:GetService("Workspace").Toys['Stockings']:FindFirstChild("ModelAfter") then
                 repeat api.teleport(CFrame.new(ToysFolder['Stockings'].Platform.CFrame.Position) * CFrame.new(0,3,0)) task.wait() until not CheckToyCooldown('Stockings')
                 VirtualInputManager:SendMouseButtonEvent(407, 26, 0, true, game, 1)
                 VirtualInputManager:SendMouseButtonEvent(407, 26, 0, false, game, 1)
@@ -4412,7 +4413,7 @@ task.spawn(function()
                     end
                 end
             end
-            if kocmoc.toggles.autoonettart and CheckToyCooldown("Onett's Lid Art") then
+            if kocmoc.toggles.autoonettart and CheckToyCooldown("Onett's Lid Art") and game:GetService("Workspace").Toys["Onett's Lid Art"]:FindFirstChild("ModelAfter") then
                 repeat api.teleport(CFrame.new(ToysFolder["Onett's Lid Art"].Platform.CFrame.Position) * CFrame.new(0,3,0)) task.wait() until not CheckToyCooldown("Onett's Lid Art")
                 VirtualInputManager:SendMouseButtonEvent(407, 26, 0, true, game, 1)
                 VirtualInputManager:SendMouseButtonEvent(407, 26, 0, false, game, 1)
@@ -4425,7 +4426,7 @@ task.spawn(function()
                     end
                 end
             end
-            if kocmoc.toggles.autocandles and CheckToyCooldown("Honeyday Candles") then
+            if kocmoc.toggles.autocandles and CheckToyCooldown("Honeyday Candles") and game:GetService("Workspace").Toys['Honeyday Candles']:FindFirstChild("ModelAfter") then
                 repeat api.teleport(CFrame.new(ToysFolder['Honeyday Candles'].Platform.CFrame.Position) * CFrame.new(0,3,0)) task.wait() until not CheckToyCooldown('Honeyday Candles')
                 VirtualInputManager:SendMouseButtonEvent(407, 26, 0, true, game, 1)
                 VirtualInputManager:SendMouseButtonEvent(407, 26, 0, false, game, 1)
@@ -4437,7 +4438,7 @@ task.spawn(function()
                     end
                 end
             end
-            if kocmoc.toggles.autofeast and CheckToyCooldown("Beesmas Feast") then
+            if kocmoc.toggles.autofeast and CheckToyCooldown("Beesmas Feast") and game:GetService("Workspace").Toys['Beesmas Feast']:FindFirstChild("ModelAfter") then
                 repeat api.teleport(CFrame.new(ToysFolder['Beesmas Feast'].Platform.CFrame.Position) * CFrame.new(0,3,0)) task.wait() until not CheckToyCooldown('Beesmas Feast')
                 VirtualInputManager:SendMouseButtonEvent(407, 26, 0, true, game, 1)
                 VirtualInputManager:SendMouseButtonEvent(407, 26, 0, false, game, 1)
@@ -4655,8 +4656,10 @@ end)
 
 task.spawn(function()
         while task.wait() do
-        if kocmoc.toggles.sproutsummoner then
-        game:GetService("ReplicatedStorage").Events.ToyEvent:FireServer("Sprout Summoner")
+        if kocmoc.toggles.sproutsummoner and CheckToyCooldown('Sprout Summoner') then
+        repeat api.teleport(CFrame.new(ToysFolder['Sprout Summoner'].Platform.CFrame.Position) * CFrame.new(0,3,0)) task.wait() until not CheckToyCooldown('Sprout Summoner')
+        VirtualInputManager:SendMouseButtonEvent(407, 26, 0, true, game, 1)
+        VirtualInputManager:SendMouseButtonEvent(407, 26, 0, false, game, 1)
         end
     end
 end)
@@ -5328,7 +5331,6 @@ if loadRecent and isfile('kocmoc/recent.json') then
             if v:FindFirstChild("Icon") and v.Icon.Image == "rbxassetid://1436835355" then
                 task.wait(5)
                 VirtualInputManager:SendMouseButtonEvent(65, 94, 0, true, game, 1)
-                VirtualInputManager:SendMouseButtonEvent(65, 94, 0, false, game, 1)
             end
         end
     end
@@ -5467,7 +5469,6 @@ if autoload then
             if v:FindFirstChild("Icon") and v.Icon.Image == "rbxassetid://1436835355" then
                 task.wait(5)
                 VirtualInputManager:SendMouseButtonEvent(65, 94, 0, true, game, 1)
-                VirtualInputManager:SendMouseButtonEvent(65, 94, 0, false, game, 1)
             end
         end
     end
