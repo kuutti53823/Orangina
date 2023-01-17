@@ -51,6 +51,7 @@ end
 -- Script temporary variables
 local player = game.Players.LocalPlayer
 local playerstatsevent = game:GetService("ReplicatedStorage").Events.RetrievePlayerStats
+local VirtualInputManager = game:GetService("VirtualInputManager")
 local playeractivescommand = game:GetService("ReplicatedStorage").Events.PlayerActivesCommand
 local statstable = playerstatsevent:InvokeServer()
 local monsterspawners = game.Workspace.MonsterSpawners
@@ -2268,6 +2269,7 @@ local Config = {
     Keybind = Enum.KeyCode.Semicolon
 }
 local Window = library:CreateWindow(Config, game:GetService("CoreGui"))
+Window:Toggle(false)
 
 local guiElements = {
     toggles = {},
@@ -5320,7 +5322,6 @@ if loadRecent and isfile('kocmoc/recent.json') then
         api.notify("Rosemoc " .. temptable.version, "No such config file!", 2)
     end
 
-    local VirtualInputManager = game:GetService("VirtualInputManager")
     local menuTabs = player.PlayerGui.ScreenGui.Menus.ChildTabs
     local set_thread_identity = syn and syn.set_thread_identity or setthreadcontext or setidentity
 
@@ -5458,7 +5459,6 @@ if autoload then
         api.notify("Rosemoc " .. temptable.version, "No such config file!", 2)
     end
 
-    local VirtualInputManager = game:GetService("VirtualInputManager")
     local menuTabs = player.PlayerGui.ScreenGui.Menus.ChildTabs
     local set_thread_identity = syn and syn.set_thread_identity or setthreadcontext or setidentity
 
